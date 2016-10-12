@@ -1,0 +1,5 @@
+vendor/
+bootstrap/cache/twig/
+.settings
+.buildpath
+.project
