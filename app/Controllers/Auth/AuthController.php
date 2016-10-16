@@ -105,16 +105,17 @@ class AuthController extends Controller
         /**
         * If validation is OK, then continue with registration.
         */
-        $user = User::create([
-            'user_email' => $request->getParam('user_email'),
-            'user_name' => $request->getParam('user_name'),
-            'user_password_hash' => password_hash($request->getParam('user_password'), PASSWORD_DEFAULT),
-        ]);
-
+        $user=new User();
+        $user->user_email=$request->getParam('user_email');
+        $user->user_name=$request->getParam('user_name');
+        $user->user_password_hash= password_hash($request->getParam('user_password'), PASSWORD_DEFAULT);
+		$user->user_account_type=0;
+		$user->save();
         if($this->auth->attempt($user->user_email, $request->getParam('user_password'))){
             /** Add a flas message that everything went ok **/
+        	
             $this->flash->addMessage('success', 'You have been signed up!');
-
+				
             /** On success registration, redirect to dashboard */
             return $response->withRedirect($this->router->pathFor('home'));
         }
