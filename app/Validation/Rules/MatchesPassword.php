@@ -16,6 +16,7 @@ class MatchesPassword extends AbstractRule
 
     public function validate($input)
     {
-        return password_verify($input, $this->password);
+    	
+        return $input===$this->password;
     }
 }
