@@ -64,11 +64,10 @@ class Auth
     *
     * @return bool
     */
-    public function attempt($email, $password)
+    public function attempt($username, $password)
     {
         /* Try and fetch user information DB */
-        $user = User::where('user_email', $email)->first();
-
+        $user = User::where('user_name', $username)->first();
         /**
         * Password throttling
         *

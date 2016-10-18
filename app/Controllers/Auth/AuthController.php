@@ -50,7 +50,7 @@ class AuthController extends Controller
         }
 
         $auth = $this->auth->attempt(
-            $request->getParam('user_email'),
+            $request->getParam('user_name'),
             $request->getParam('user_password')
         );
 
