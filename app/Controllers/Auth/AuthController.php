@@ -101,7 +101,6 @@ class AuthController extends Controller
         if ($validation->failed()) {
             return $response->withRedirect($this->router->pathFor('auth.signup'));
         }
-
         /**
         * If validation is OK, then continue with registration.
         */
@@ -110,6 +109,8 @@ class AuthController extends Controller
         $user->user_name=$request->getParam('user_name');
         $user->user_password_hash= password_hash($request->getParam('user_password'), PASSWORD_DEFAULT);
 		$user->user_account_type=0;
+		$user->user_age=$request->getParam('user_age');
+		$user->user_gender=$request->getParam('user_gender');
 		$user->save();
         if($this->auth->attempt($user->user_email, $request->getParam('user_password'))){
             /** Add a flas message that everything went ok **/
