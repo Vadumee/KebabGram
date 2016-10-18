@@ -55,7 +55,7 @@ class AuthController extends Controller
         );
 
         if (!$auth) {
-            $this->flash->addMessage('error', 'Could not sign you in with those details.');
+            $this->flash->addMessage('error', 'Wrong username/password.');
             return $response->withRedirect($this->router->pathFor('auth.signin'));
         }
 
