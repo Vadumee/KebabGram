@@ -1,0 +1,42 @@
+{% block title %}Kebabstragram - Add a kebab{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Add a Kebab</div>
+            <div class="panel-body">
+                <form action="{{ path_for('kebab.add') }}" method="post" autocomplete="off">
+                    <input type="hidden" name="op" id="op" value="reg">
+                    <div class="form-group{{ errors.kebab_pic_link ? ' has-error' : '' }}">
+                        <label for="kebab_picture">Kebab picture</label>
+                        <input type="text" name="kebab_picture" id="kebab_picture" placeholder="Very tasty ! Ohlala !" class="form-control" value="{{ old.user_email }}">
+                        {% if errors.kebab_pic_link %}
+                            <span class="help-block">{{ errors.kebab_pic_link | first }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="form-group{{ errors.kebab_description ? ' has-error' : '' }}">
+                        <label for="kebab_description">Description</label>
+                        <input type="text" name="description" id="kebab_description" class="form-control">
+                        {% if errors.kebab_description %}
+                            <span class="help-block">{{ errors.kebab_description | first }}</span>
+                        {% endif %}
+                    </div>
+                     <div class="form-group{{ errors.tag_text ? ' has-error' : '' }}">
+                        <label for="tag_text">Description</label>
+                        <input type="text" name="tagtext" id="tagtext" class="form-control">
+                        {% if errors.tag_text %}
+                            <span class="help-block">{{ errors.tag_text | first }}</span>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add the kebab !</button>
+
+                    {{ csrf.field | raw }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

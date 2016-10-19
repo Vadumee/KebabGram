@@ -7,6 +7,8 @@ use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
 use App\Middleware\AdminMiddleware;
 use App\Middleware\SubscriberMiddleware;
+use App\Controllers\Kebab\KebabController;
+
 
 // // Render a view immediately from routes.php with and arguments
 // $app->get('/@{username}', function ($request, $response, $args) {
@@ -31,6 +33,11 @@ $app->group('', function () {
     $this->get('/signin', 'AuthController:getSignIn')->setName('auth.signin');
     $this->post('/signin', 'AuthController:postSignIn');
 })->add(new GuestMiddleware($container));
+
+$app->group('', function() {
+	$this->get('/kebab/index', 'KebabController:getAddKebab')->setName('kebab.add');
+	$this->post('/kebab/index', 'KebabController:postAddKebab');
+});
 
 $app->group('', function () {
     $this->get('/signout', 'AuthController:getSignOut')->setName('auth.signout');

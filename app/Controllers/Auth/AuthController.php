@@ -39,10 +39,10 @@ class AuthController extends Controller
         * Check if the fields are valied. op is a hidden field. To prevent bots
         */
         $validation = $this->validator->validate($request, [
-            'op' => v::equals('reg'),
+            'op' => v::equals('rpostSignUpeg'),
         ]);
 
-        /**
+        /**postSignUp
         * If the fields fail, then redirect back to signup
         */
         if ($validation->failed()) {
@@ -87,7 +87,7 @@ class AuthController extends Controller
         * Check if the fields are valied. op is a hidden field, to prevent bots
         */
         v::with('App\\Validation\\Rules\\');
-        
+
         $validation = $this->validator->validate($request, [
             'user_email' => v::noWhitespace()->notEmpty()->email()->emailAvailable(),
             'user_name' => v::noWhitespace()->notEmpty()->alpha(),
@@ -113,9 +113,9 @@ class AuthController extends Controller
 		$user->save();
         if($this->auth->attempt($user->user_email, $request->getParam('user_password'))){
             /** Add a flas message that everything went ok **/
-        	
+
             $this->flash->addMessage('success', 'You have been signed up!');
-				
+
             /** On success registration, redirect to dashboard */
             return $response->withRedirect($this->router->pathFor('home'));
         }

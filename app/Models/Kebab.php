@@ -11,7 +11,6 @@ class Kebab extends Model {
     protected $fillable = [
         'kebab_pic_link',
         'kebab_description',
-        'kebab_tasty_points',
     ];
 }
 
