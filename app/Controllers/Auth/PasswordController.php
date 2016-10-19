@@ -21,20 +21,49 @@ class PasswordController extends Controller
     *
     * @return bool
     */
-    public function postChangePassword($request, $response)
-    {
-        $validation = $this->validator->validate($request, [
-            'user_password_old' => v::noWhitespace()->notEmpty()->matchesPassword($this->auth->user()->user_password_hash),
-            'user_password' => v::noWhitespace()->notEmpty(),
-        ]);
+    public function postChangePassword($request, $response){
 
+    	v::with('App\\Validation\\Rules\\');
+    	if (!empty($request->getParam('user_email'))) {
+    		$validation = $this->validator->validate($request, [
+    				'user_email' => v::noWhitespace()->notEmpty()->email()->emailExist(),
+    		]);
+    	}
+    	else{
+	        $validation = $this->validator->validate($request, [
+	            'user_password' => v::noWhitespace()->notEmpty()->passwordAcceptance(),
+	        ]);
+    	}
+        
+		
         if ($validation->failed()) {
             return $response->withRedirect($this->router->pathFor('auth.password.change'));
         }
+			
+        
+        if (!empty($request->getParam('user_email'))) {
+        	
+        	$chaine='azertyuiopqsdfghjklmwxcvbn123456789';
+        	$nb_lettres = strlen($chaine) - 1;
+        	$generation = '';
+        	for($i=0; $i < 12; $i++){
+        		$pos = mt_rand(0, $nb_lettres);
+        		$car = $chaine[$pos];
+        		$generation .= $car;
+        	}
+        	$user=User::where("user_email",$request->getParam('user_email'))->first();
+        	$user->user_password_hash= password_hash($generation, PASSWORD_DEFAULT);
+       		$this->flash->addMessage('info', "Le mot de passe temporaire est envoyé sur l'adresse mail utilisateur:".$generation);
+        }
+       	else {
+       		$user=$this->auth->user();
+        	$user->user_password_hash= password_hash($request->getParam('user_password'), PASSWORD_DEFAULT);
+        	$this->flash->addMessage('info', 'Your password was changed!');
+       	}
+       	
 
-        $this->auth->user()->setPassword($request->getParam('user_password'));
-
-        $this->flash->addMessage('info', 'Your password was changed!');
+       	$user->save();
         return $response->withRedirect($this->router->pathFor('home'));
+    	
     }
 }

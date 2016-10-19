@@ -23,7 +23,7 @@
                             {% endif %}
                         </div>
                         <button type="submit" class="btn btn-primary">Sign in</button>
-
+						<a href="{{ path_for('auth.password.change') }}">Forgot password ?</a>
                         {{ csrf.field | raw }}
                     </form>
                 </div>
