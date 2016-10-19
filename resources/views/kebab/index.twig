@@ -1,3 +1,4 @@
+{% extends 'templates/app.twig' %}
 {% block title %}Kebabstragram - Add a kebab{% endblock %}
 
 {% block content %}
@@ -7,29 +8,70 @@
         <div class="panel panel-default">
             <div class="panel-heading">Add a Kebab</div>
             <div class="panel-body">
-                <form action="{{ path_for('kebab.add') }}" method="post" autocomplete="off">
+                <form action="{{ path_for('kebab.add') }}" method="post" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="op" id="op" value="reg">
                     <div class="form-group{{ errors.kebab_pic_link ? ' has-error' : '' }}">
                         <label for="kebab_picture">Kebab picture</label>
-                        <input type="text" name="kebab_picture" id="kebab_picture" placeholder="Very tasty ! Ohlala !" class="form-control" value="{{ old.user_email }}">
+                        <input type="file" name="kebab_pic_link" id="kebab_pic_link">
                         {% if errors.kebab_pic_link %}
                             <span class="help-block">{{ errors.kebab_pic_link | first }}</span>
                         {% endif %}
                     </div>
                     <div class="form-group{{ errors.kebab_description ? ' has-error' : '' }}">
                         <label for="kebab_description">Description</label>
-                        <input type="text" name="description" id="kebab_description" class="form-control">
+                        <input type="text" name="description" id="kebab_description" placeholder="Very tasty ! Ohlala !" class="form-control">
                         {% if errors.kebab_description %}
                             <span class="help-block">{{ errors.kebab_description | first }}</span>
                         {% endif %}
                     </div>
                      <div class="form-group{{ errors.tag_text ? ' has-error' : '' }}">
-                        <label for="tag_text">Description</label>
-                        <input type="text" name="tagtext" id="tagtext" class="form-control">
+                        <label for="tag_text">Tags</label>
+                        <input type="text" name="tag_text" id="tag_text" class="form-control">
                         {% if errors.tag_text %}
                             <span class="help-block">{{ errors.tag_text | first }}</span>
                         {% endif %}
                     </div>
+                    <hr>
+                    <div>
+                    	<label for="kebab_adress">Kebab Adress</label>
+                    	<hr>
+                    	<div class="form-group{{ errors.kebab_name ? ' has-error' : '' }}">
+                        <label for="tag_text">Kebab Seller</label>
+                        <input type="text" name="kebab_name" id="kebab_name" class="form-control">
+                        {% if errors.tag_text %}
+                            <span class="help-block">{{ errors.kebab_name | first }}</span>
+                        {% endif %}
+                   		</div>
+                   		<div class="form-group{{ errors.country ? ' has-error' : '' }}">
+                        <label for="tag_text">Country</label>
+                        <input type="text" name="country" id="country" class="form-control">
+                        {% if errors.tag_text %}
+                            <span class="help-block">{{ errors.country | first }}</span>
+                        {% endif %}
+                   		</div>
+                   		<div class="form-group{{ errors.city ? ' has-error' : '' }}">
+                        <label for="tag_text">City</label>
+                        <input type="text" name="city" id="city" class="form-control">
+                        {% if errors.tag_text %}
+                            <span class="help-block">{{ errors.city | first }}</span>
+                        {% endif %}
+                   		</div>
+                   		<div class="form-group{{ errors.street_number ? ' has-error' : '' }}">
+                        <label for="tag_text">Street Number</label>
+                        <input type="text" name="street_number" id="street_number" class="form-control">
+                        {% if errors.tag_text %}
+                            <span class="help-block">{{ errors.street_number | first }}</span>
+                        {% endif %}
+                   		</div>
+                   		<div class="form-group{{ errors.street ? ' has-error' : '' }}">
+                        <label for="tag_text">Street Name</label>
+                        <input type="text" name="street" id="street" class="form-control">
+                        {% if errors.tag_text %}
+                            <span class="help-block">{{ errors.street | first }}</span>
+                        {% endif %}
+                   		</div>
+                    </div>
+                    
                     <button type="submit" class="btn btn-primary">Add the kebab !</button>
 
                     {{ csrf.field | raw }}
