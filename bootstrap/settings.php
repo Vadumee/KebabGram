@@ -5,6 +5,7 @@ return [
     	// Slim genereal settings
         'determineRouteBeforeAppMiddleware' => false,
         'displayErrorDetails' => true,
+        'addContentLengthHeader' => false,
 
         // View settings (template engine Twig)
         'view' => [
@@ -20,9 +21,9 @@ return [
         'db' => [
             'driver' => 'mysql', // mysql or sqlite
             'host' => 'localhost', // To change port, just add it afterwards like localhost:8889
-            'database' => 'slim3', // DB name or SQLite path
-            'username' => 'root',
-            'password' => '',
+            'database' => 'Kebabstagram', // DB name or SQLite path
+            'username' => 'wurth2u',
+            'password' => 'root',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_general_ci',
             'prefix' => '',

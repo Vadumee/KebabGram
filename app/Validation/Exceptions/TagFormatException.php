@@ -4,11 +4,11 @@ namespace App\Validation\Exceptions;
 
 use Respect\Validation\Exceptions\ValidationException;
 
-class ImageSizeException extends ValidationException
+class TagFormatException extends ValidationException
 {
 	public static $defaultTemplates = [
 			self::MODE_DEFAULT => [
-					self::STANDARD => 'The picture size must be below 500 Ko.',
+					self::STANDARD => 'Un tag doit explicitement commencer avec un "#".',
 			],
 	];
 }

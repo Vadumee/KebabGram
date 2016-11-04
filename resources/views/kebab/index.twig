@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group{{ errors.kebab_description ? ' has-error' : '' }}">
                         <label for="kebab_description">Description</label>
-                        <input type="text" name="description" id="kebab_description" placeholder="Very tasty ! Ohlala !" class="form-control">
+                        <input type="text" name="kebab_description" id="kebab_description" placeholder="Very tasty ! Ohlala !" class="form-control">
                         {% if errors.kebab_description %}
                             <span class="help-block">{{ errors.kebab_description | first }}</span>
                         {% endif %}
@@ -37,9 +37,9 @@
                     	<hr>
                     	<div class="form-group{{ errors.kebab_name ? ' has-error' : '' }}">
                         <label for="tag_text">Kebab Seller</label>
-                        <input type="text" name="kebab_name" id="kebab_name" class="form-control">
+                        <input type="text" name="shop_name" id="shop_name" class="form-control">
                         {% if errors.tag_text %}
-                            <span class="help-block">{{ errors.kebab_name | first }}</span>
+                            <span class="help-block">{{ errors.shop_name | first }}</span>
                         {% endif %}
                    		</div>
                    		<div class="form-group{{ errors.country ? ' has-error' : '' }}">
@@ -71,7 +71,7 @@
                         {% endif %}
                    		</div>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary">Add the kebab !</button>
 
                     {{ csrf.field | raw }}
