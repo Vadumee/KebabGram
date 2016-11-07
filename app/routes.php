@@ -42,8 +42,6 @@ $app->group('', function() {
 $app->group('', function () {
     $this->get('/signout', 'AuthController:getSignOut')->setName('auth.signout');
 
-    $this->get('/password/change', 'PasswordController:getChangePassword')->setName('auth.password.change');
-    $this->post('/password/change', 'PasswordController:postChangePassword');
 
     $this->get('/dashboard', 'AuthController:dashboard')->setName('dashboard');
 
@@ -59,6 +57,12 @@ $app->group('', function () {
     $this->get('/admin', 'AdminController:getIndex')->setName('admin.index');
     $this->post('/admin', 'AdminController:postIndex')->setName('admin.post');
 })->add(new AdminMiddleware($container));
+
+
+
+$app->get('/password/change', 'PasswordController:getChangePassword')->setName('auth.password.change');
+$app->post('/password/change', 'PasswordController:postChangePassword');
+
 
 /* Subscription */
 $app->get('/subscription', function ($request, $response) {

@@ -14,6 +14,8 @@ class User extends Model
         'user_email',
         'user_name',
         'user_password_hash',
+        'user_age',
+        'user_gender',
     ];
 
 /**

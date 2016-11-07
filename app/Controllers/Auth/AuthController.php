@@ -50,12 +50,12 @@ class AuthController extends Controller
         }
 
         $auth = $this->auth->attempt(
-            $request->getParam('user_email'),
+            $request->getParam('user_name'),
             $request->getParam('user_password')
         );
 
         if (!$auth) {
-            $this->flash->addMessage('error', 'Could not sign you in with those details.');
+            $this->flash->addMessage('error', 'Wrong username/password.');
             return $response->withRedirect($this->router->pathFor('auth.signin'));
         }
 
@@ -90,8 +90,9 @@ class AuthController extends Controller
 
         $validation = $this->validator->validate($request, [
             'user_email' => v::noWhitespace()->notEmpty()->email()->emailAvailable(),
-            'user_name' => v::noWhitespace()->notEmpty()->alpha(),
-            'user_password' => v::noWhitespace()->notEmpty(),
+            'user_name' => v::noWhitespace()->notEmpty()->usernameAvailable()->usernameAcceptance(),
+            'user_password' => v::noWhitespace()->notEmpty()->passwordAcceptance(),
+            'user_password_confirm' => v::noWhitespace()->notEmpty()->matchesPassword($_POST['user_password']),
             'op' => v::equals('reg'),
         ]);
 
@@ -101,24 +102,32 @@ class AuthController extends Controller
         if ($validation->failed()) {
             return $response->withRedirect($this->router->pathFor('auth.signup'));
         }
-
         /**
         * If validation is OK, then continue with registration.
         */
         $user=new User();
+        $user->user_id=uniqid();
         $user->user_email=$request->getParam('user_email');
         $user->user_name=$request->getParam('user_name');
         $user->user_password_hash= password_hash($request->getParam('user_password'), PASSWORD_DEFAULT);
 		$user->user_account_type=0;
+		$user->user_age=$request->getParam('user_age');
+		$user->user_gender=$request->getParam('user_gender');
 		$user->save();
-        if($this->auth->attempt($user->user_email, $request->getParam('user_password'))){
-            /** Add a flas message that everything went ok **/
 
+
+
+
+        $auth = $this->auth->attempt(
+            $request->getParam('user_name'),
+            $request->getParam('user_password')
+        );
+
+        if ($auth) {
             $this->flash->addMessage('success', 'You have been signed up!');
-
-            /** On success registration, redirect to dashboard */
             return $response->withRedirect($this->router->pathFor('home'));
         }
+
         return false;
     }
 
