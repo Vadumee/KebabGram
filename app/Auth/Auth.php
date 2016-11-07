@@ -64,10 +64,10 @@ class Auth
     *
     * @return bool
     */
-    public function attempt($email, $password)
+    public function attempt($username, $password)
     {
         /* Try and fetch user information DB */
-        $user = User::where('user_email', $email)->first();
+        $user = User::where('user_name', $username)->first();
 
         /**
         * Password throttling
@@ -124,7 +124,6 @@ class Auth
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user->user_id;
             $_SESSION['user_email'] = $user->user_email;
-
             $user->session_id = session_id();
             $user->save();
 
