@@ -21,9 +21,9 @@ return [
         'db' => [
             'driver' => 'mysql', // mysql or sqlite
             'host' => 'localhost', // To change port, just add it afterwards like localhost:8889
-            'database' => 'Kebabstagram', // DB name or SQLite path
-            'username' => 'wurth2u',
-            'password' => 'root',
+            'database' => 'kebabstagram', // DB name or SQLite path
+            'username' => 'root',
+            'password' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_general_ci',
             'prefix' => '',

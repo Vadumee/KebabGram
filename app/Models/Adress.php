@@ -9,7 +9,7 @@ class Adress extends Model {
     protected $primaryKey = 'kebab_id';
 
     protected $fillable = [
-        'kebab_name',
+        'shop_name',
         'country',
         'city',
         'street',

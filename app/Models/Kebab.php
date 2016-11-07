@@ -9,7 +9,8 @@ class Kebab extends Model {
     protected $primaryKey = 'kebab_id';
 
     protected $fillable = [
-        'kebab_pic_link',
+        'kebab_image_path',
+        'kebab_image_extension',
         'kebab_description',
     ];
 }

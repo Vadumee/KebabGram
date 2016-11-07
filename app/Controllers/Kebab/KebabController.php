@@ -10,6 +10,9 @@ use Respect\Validation\Validator as v;
 class KebabController extends Controller {
 
   public function getAddKebab($request, $response) {
+    /*if(!(isset($_SESSION["user_email"])) {
+      return $this->view->render($response, 'home.twig');
+    }*/
   	return $this->view->render($response, 'kebab/index.twig');
   }
 
@@ -48,13 +51,16 @@ class KebabController extends Controller {
   	$kebab->kebab_description=$request->getParam('kebab_description');
     $kebab->kebab_tasty_points=0;
     //pour l'instant on fait un utilisateur fictif
+    //$kebab->user_id=$_SESSION["user_email"];
     $kebab->user_id="Jean-Test";
-    $kebab->save();
+    //
     $tmp_name = $_FILES["kebab_pic_link"]["tmp_name"];
     // basename() may prevent filesystem traversal attacks;
     // further validation/sanitation of the filename may be appropriate
     $extension = explode(".",$_FILES["kebab_pic_link"]["name"]);
     move_uploaded_file($tmp_name, "images/kebabs/".$id_image_path.".".$extension[1]);
+    $kebab->kebab_image_extension=$extension[1];
+    $kebab->save();
 
     //on créer une association en faisant une row Tag pour chaque tag
     $tags=explode(" ",$request->getParam('tag_text'));
@@ -70,7 +76,7 @@ class KebabController extends Controller {
     //on récupère maintenant toutes les infos pour créer l'adresse du kebab
     $adresse=new Adress();
     $adress_id = uniqid();
-    $adresse->adress_id=$adress_id;
+    $adresse->adresse_id=$adress_id;
     $adresse->shop_name=$request->getParam('shop_name');
     $adresse->country=$request->getParam('country');
     $adresse->city=$request->getParam('city');
