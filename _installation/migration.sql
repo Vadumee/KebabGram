@@ -74,8 +74,8 @@ CREATE TABLE `users` (
   `user_profile` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Is the profile public, 1 is yes.',
   `user_password_reset_hash` char(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'user''s password reset code',
   `user_password_reset_timestamp` bigint(20) DEFAULT NULL COMMENT 'timestamp of the password reset request',
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='user data';
 
 CREATE TABLE `vote` (
@@ -126,3 +126,25 @@ ALTER TABLE `vote`
 
 INSERT INTO `users` (`user_id`, `session_id`, `user_name`, `user_age`, `user_gender`, `user_slug`, `user_password_hash`, `user_email`, `user_active`, `user_deleted`, `user_account_type`, `user_has_avatar`, `user_remember_me_token`, `user_suspension_timestamp`, `user_last_login_timestamp`, `user_failed_logins`, `user_last_failed_login`, `user_activation_hash`, `user_profile`, `user_password_reset_hash`, `user_password_reset_timestamp`, `created_at`, `updated_at`) VALUES
 ('582082313cabe', NULL, 'iryu54', 0, 'Non Specified', '', '$2y$10$Nk/YWAztZWniGOKeJKZIyebYRT6bX9NCwPUtP09DRQ9ERbDN.RkDK', 'lementai@hotmail.fr', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, '2016-11-07 13:31:29', '2016-11-07 13:32:16');
+
+
+INSERT INTO `kebabs` (`kebab_id`, `user_id`, `kebab_description`, `kebab_tasty_points`, `kebab_image_path`, `kebab_image_extension`, `updated_at`, `created_at`) VALUES
+('581cf0ccec0aa', 'Jean-Test', 'ISSOU', 5, '581cf0ccec0b0', 'jpg', '2016-11-06 18:57:24', '2016-11-06 18:57:24'),
+('581d05e46f9c5', 'Jean-Test', 'Un kebab asiat parce que c\'est du chien kappa', 0, '581d05e46f9c9', 'jpg', '2016-11-04 21:04:20', '2016-11-04 21:04:20'),
+('581f61f03b542', 'Jean-Test', 'Un jour de printemps, un grand philosophe eut la sympathie de m\'octroyer un délicieux kebab, j\'ai juré wallah', 2, '581f61f03b549', 'png', '2016-11-06 18:57:33', '2016-11-06 18:57:33');
+
+INSERT INTO `adresses` (`adresse_id`, `shop_name`, `country`, `city`, `street_number`, `kebab_id`, `street`, `updated_at`, `created_at`) VALUES
+('581cf0cd4ac3f', 'OOPOPOO', 'OPOPOPO', 'POPOPO', 7, '581cf0ccec0aa', 'POPOPO', '2016-11-04 19:34:21', '2016-11-04 19:34:21'),
+('581d05e4978dd', 'LeePong et fils', 'Chine', 'HongKong', 420, '581d05e46f9c5', 'Rue de la MLG', '2016-11-04 21:04:20', '2016-11-04 21:04:20'),
+('581f61f0dea89', 'JPC Kebab', 'France', 'Onche City', 8173, '581f61f03b542', 'If you know what i mean', '2016-11-06 16:01:36', '2016-11-06 16:01:36');
+
+INSERT INTO `tags` (`tag_id`, `kebab_id`, `tag_text`, `updated_at`, `created_at`) VALUES
+('581cf0cd45c04', '581cf0ccec0aa', 'ISSOU', '2016-11-04 19:34:21', '2016-11-04 19:34:21'),
+('581d05e47f655', '581d05e46f9c5', 'Cliche', '2016-11-04 21:04:20', '2016-11-04 21:04:20'),
+('581d05e4842df', '581d05e46f9c5', 'doge', '2016-11-04 21:04:20', '2016-11-04 21:04:20'),
+('581d05e48c6af', '581d05e46f9c5', 'onche', '2016-11-04 21:04:20', '2016-11-04 21:04:20'),
+('581f61f078797', '581f61f03b542', 'JPC', '2016-11-06 16:01:36', '2016-11-06 16:01:36'),
+('581f61f095dfa', '581f61f03b542', 'YTP', '2016-11-06 16:01:36', '2016-11-06 16:01:36'),
+('581f61f0b64cb', '581f61f03b542', 'kebab', '2016-11-06 16:01:36', '2016-11-06 16:01:36'),
+('581f61f0cded6', '581f61f03b542', 'unboeuf', '2016-11-06 16:01:36', '2016-11-06 16:01:36'),
+('581f61f0d8bbe', '581f61f03b542', 'nonprobleme', '2016-11-06 16:01:36', '2016-11-06 16:01:36');

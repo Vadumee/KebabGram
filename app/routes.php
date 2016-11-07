@@ -7,6 +7,8 @@ use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
 use App\Middleware\AdminMiddleware;
 use App\Middleware\SubscriberMiddleware;
+use App\Controllers\Kebab\KebabController;
+
 
 // // Render a view immediately from routes.php with and arguments
 // $app->get('/@{username}', function ($request, $response, $args) {
@@ -44,6 +46,9 @@ $app->group('', function () {
     $this->get('/notes/{note_id:[0-9]+}', 'NoteController:getEditNote');
     $this->put('/notes/{note_id:[0-9]+}', 'NoteController:postEditNote')->setName('edit.note');
     $this->get('/notes/deleteNote/{note_id:[0-9]+}', 'NoteController:deleteNote')->setName('delete.note');
+
+    $this->get('/kebab/add', 'KebabController:getAddKebab')->setName('kebab.add');
+    $this->post('/kebab/add', 'KebabController:postAddKebab');
 })->add(new AuthMiddleware($container));
 
 $app->group('', function () {

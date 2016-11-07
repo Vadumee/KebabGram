@@ -42,7 +42,7 @@ class AuthController extends Controller
             'op' => v::equals('reg'),
         ]);
 
-        /**
+        /**postSignUp
         * If the fields fail, then redirect back to signup
         */
         if ($validation->failed()) {
@@ -87,6 +87,7 @@ class AuthController extends Controller
         * Check if the fields are valied. op is a hidden field, to prevent bots
         */
         v::with('App\\Validation\\Rules\\');
+
         $validation = $this->validator->validate($request, [
             'user_email' => v::noWhitespace()->notEmpty()->email()->emailAvailable(),
             'user_name' => v::noWhitespace()->notEmpty()->usernameAvailable()->usernameAcceptance(),
@@ -113,6 +114,7 @@ class AuthController extends Controller
 		$user->user_age=$request->getParam('user_age');
 		$user->user_gender=$request->getParam('user_gender');
 		$user->save();
+
 
 
 
