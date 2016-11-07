@@ -28,8 +28,8 @@ class HomeController extends Controller
             }
     		//$images_link[$i] = $kebabs[$i].kebab_image_path;
     	}
-        $images=['images' => $images_link_by_date, 'images_points' => $images_link_by_points];
+        $data=['images' => $images_link_by_date, 'images_points' => $images_link_by_points];
 
-        return $this->view->render($response, 'home.twig', $images);
+        return $this->view->render($response, 'home.twig', $data);
     }
 }

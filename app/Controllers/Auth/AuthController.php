@@ -39,7 +39,7 @@ class AuthController extends Controller
         * Check if the fields are valied. op is a hidden field. To prevent bots
         */
         $validation = $this->validator->validate($request, [
-            'op' => v::equals('rpostSignUpeg'),
+            'op' => v::equals('reg'),
         ]);
 
         /**postSignUp
