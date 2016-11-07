@@ -34,11 +34,6 @@ $app->group('', function () {
     $this->post('/signin', 'AuthController:postSignIn');
 })->add(new GuestMiddleware($container));
 
-$app->group('', function() {
-	$this->get('/kebab/index', 'KebabController:getAddKebab')->setName('kebab.add');
-	$this->post('/kebab/index', 'KebabController:postAddKebab');
-});
-
 $app->group('', function () {
     $this->get('/signout', 'AuthController:getSignOut')->setName('auth.signout');
 
@@ -51,6 +46,9 @@ $app->group('', function () {
     $this->get('/notes/{note_id:[0-9]+}', 'NoteController:getEditNote');
     $this->put('/notes/{note_id:[0-9]+}', 'NoteController:postEditNote')->setName('edit.note');
     $this->get('/notes/deleteNote/{note_id:[0-9]+}', 'NoteController:deleteNote')->setName('delete.note');
+
+    $this->get('/kebab/add', 'KebabController:getAddKebab')->setName('kebab.add');
+    $this->post('/kebab/add', 'KebabController:postAddKebab');
 })->add(new AuthMiddleware($container));
 
 $app->group('', function () {
