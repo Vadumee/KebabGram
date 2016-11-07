@@ -105,6 +105,7 @@ class AuthController extends Controller
         * If validation is OK, then continue with registration.
         */
         $user=new User();
+        $user->user_id=uniqid();
         $user->user_email=$request->getParam('user_email');
         $user->user_name=$request->getParam('user_name');
         $user->user_password_hash= password_hash($request->getParam('user_password'), PASSWORD_DEFAULT);
@@ -112,14 +113,19 @@ class AuthController extends Controller
 		$user->user_age=$request->getParam('user_age');
 		$user->user_gender=$request->getParam('user_gender');
 		$user->save();
-        if($this->auth->attempt($user->user_email, $request->getParam('user_password'))){
-            /** Add a flas message that everything went ok **/
-        	
+
+
+
+        $auth = $this->auth->attempt(
+            $request->getParam('user_name'),
+            $request->getParam('user_password')
+        );
+
+        if ($auth) {
             $this->flash->addMessage('success', 'You have been signed up!');
-				
-            /** On success registration, redirect to dashboard */
             return $response->withRedirect($this->router->pathFor('home'));
         }
+
         return false;
     }
 
