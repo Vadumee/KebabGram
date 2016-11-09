@@ -25,11 +25,15 @@
      {% endif %}
      <br>
      {% if kebabs is defined %}
-     	{% for kebab in kebabs %}
-     		{% for item in kebab %}
-    			<img src="../images/kebabs/{{ item.kebab_image_path }}.{{ item.kebab_image_extension }}">
+     	{% if kebabs|length != 0 %}
+     		{% for kebab in kebabs %}
+     			{% for item in kebab %}
+    				<img src="../images/kebabs/{{ item.kebab_image_path }}.{{ item.kebab_image_extension }}">
+				{% endfor %}
 			{% endfor %}
-		{% endfor %}
+	 	{% else %}
+	 		<span>Il semblerait que votre recherche n'ait rien donnée, vérifiez que vous n'avez pas fait d'erreur de frappe ou essayez avec un autre tag/nom d'utiliateur</span>
+    	{% endif %}
      {% endif %}
 	 </div>
   </div>
