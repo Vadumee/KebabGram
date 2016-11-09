@@ -22,6 +22,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if auth.check %}
+                    <li><a href="{{ path_for('kebab.search') }}">Rechercher</a></li>
                     <li><a href="{{ path_for('kebab.add') }}">+</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ auth.user.user_name }} <span class="caret"></span></a>

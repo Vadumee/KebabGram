@@ -7,3 +7,7 @@ img {
 	height: auto;
 	display: inline-block;
 }
+
+#searchbar {
+    display: inline-block;
+}
