@@ -93,6 +93,13 @@ $container['KebabController'] = function ($container) {
 	return new \App\Controllers\Kebab\KebabController($container);
 };
 
+$container['VoteController'] = function ($container) {
+	return new \App\Controllers\Kebab\VoteController($container);
+};
+$container['JsonHelpers'] = function ($container) {
+	return new \App\Controllers\Kebab\VoteController($container);
+};
+
 $container['PasswordController'] = function ($container) {
     return new \App\Controllers\Auth\PasswordController($container);
 };

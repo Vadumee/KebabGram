@@ -10,7 +10,7 @@ img {
 #searchbar {
     display: inline-block;
 }
-#kebab_tasty_points{
+.kebab_tasty_points{
 	text-align: center;
 	font-size: 2em;
 }
