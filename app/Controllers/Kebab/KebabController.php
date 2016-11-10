@@ -3,6 +3,7 @@ namespace App\Controllers\Kebab;
 
 use App\Models\Kebab as Kebab;
 use App\Models\Adress as Adress;
+use App\Models\Vote as Vote;
 use App\Models\Tag as Tag;
 use App\Models\User as User;
 use App\Controllers\Controller;
@@ -16,11 +17,21 @@ class KebabController extends Controller {
     /*if(!(isset($_SESSION["user_email"])) {
       return $this->view->render($response, 'home.twig');
     }*/
-    $kebab = Kebab::find($args['kebab_id'])->toArray();
-    $seller= Adress::where('kebab_id', $args['kebab_id'])->first()->toArray();
-    $tags= Tag::where('kebab_id', $args['kebab_id'])->get()->toArray();
-    $user  = User::find($kebab['user_id']);
-  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller','user', 'tags'));
+      $kebab = Kebab::find($args['kebab_id'])->toArray();
+      $seller= Adress::where('kebab_id', $args['kebab_id'])->first()->toArray();
+      $tags= Tag::where('kebab_id', $args['kebab_id'])->get()->toArray();
+      $user  = User::find($kebab['user_id']);
+
+      $has_voted=true;
+      if($this->auth->check()){
+        $vote = Vote::where('user_id',$this->auth->user()->user_id)->where('kebab_id',$args['kebab_id'])->first();
+        if ($vote==null) $has_voted=false;
+      }
+      else {
+        $has_voted=false;
+      }
+
+  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller','user', 'tags', "has_voted"));
   }
 
 

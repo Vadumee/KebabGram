@@ -26,6 +26,15 @@ $( document ).ready(function() {
         });
         afficheTastyPoint(request);
     });
+    $('.unvote').click(function (request) {
+        request = $.ajax({
+          url: "/json/vote/hate",
+          data: {idKebab: pathArray[pathArray.length-1]},
+          method: "GET",
+          dataType: "json"
+        });
+        afficheTastyPoint(request);
+    });
 
 
     function afficheTastyPoint(request) {
@@ -36,8 +45,12 @@ $( document ).ready(function() {
           }
           else {
             $(".kebab_tasty_points").text(msg.tasty_point);
-            console.log(msg.user);
+                $(".down").hide();
+                $(".up").hide()
+            console.log(msg);
           }
+
+
         });
         request.fail(function( jqXHR, textStatus ,error ) {
             console.log(jqXHR);

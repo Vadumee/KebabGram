@@ -12,18 +12,39 @@ use Respect\Validation\Validator as v;
 class VoteController extends Controller {
 
   public function like($request, $response) {
+    $vote = Vote::where('user_id',$this->auth->user()->user_id)->first();
     $kebab = Kebab::where('kebab_id',$_GET["idKebab"])->first();
 
-    $kebab->kebab_tasty_points++;
-    $kebab->save();
+    if ($vote==null || $vote->kebab_id!=$_GET["idKebab"]) {
+      $vote = new Vote();
+      $vote->id=uniqid();
+      $vote->user_id= $this->auth->user()->user_id;
+      $vote->kebab_id= $_GET["idKebab"];
+      $vote->save();
+
+      $kebab->kebab_tasty_points++;
+      $kebab->save();
+    }
+
     echo json_encode(array('tasty_point' => $kebab->kebab_tasty_points));
   }
 
   public function hate($request, $response) {
+    $vote = Vote::where('user_id',$this->auth->user()->user_id)->first();
     $kebab = Kebab::where('kebab_id',$_GET["idKebab"])->first();
-    $kebab->kebab_tasty_points--;
-    $kebab->save();
-    echo json_encode(array('tasty_point' => $kebab->kebab_tasty_points ));
+    if ($vote==null || $vote->kebab_id!=$_GET["idKebab"]) {
+      $vote = new Vote();
+      $vote->id=uniqid();
+      $vote->user_id= $this->auth->user()->user_id;
+      $vote->kebab_id= $_GET["idKebab"];
+      $vote->save();
+
+      $kebab->kebab_tasty_points--;
+      $kebab->save();
+    }
+
+
+    echo json_encode(array('tasty_point' => $kebab->kebab_tasty_points));
   }
 
   public function postSearchKebab($request, $response) {

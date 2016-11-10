@@ -25,7 +25,6 @@ $app->get('/json', function ($request, $response){
 
 $app->get('/json/vote/like', 'VoteController:like')->add(new JsonAuthMiddleware($container));
 $app->get('/json/vote/hate', 'VoteController:hate')->add(new JsonAuthMiddleware($container));
-$app->get('/json/username', 'JsonHelpers:user')->add(new JsonAuthMiddleware($container));
 
 
 $app->get('/', 'HomeController:index')->setName('home');

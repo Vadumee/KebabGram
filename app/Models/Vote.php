@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model {
     protected $table = 'vote';
-    protected $primaryKey = 'kebab_id';
-      public $incrementing=false; 
+    protected $primaryKey = 'id';
+      public $incrementing=false;
 }
 
 

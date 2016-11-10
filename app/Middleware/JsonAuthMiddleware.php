@@ -10,8 +10,10 @@ class JsonAuthMiddleware extends Middleware
             $this->container->flash->addMessage('error', 'Please sign in before doing that.');
             echo json_encode(array('redirection' => $this->container->router->pathFor('auth.signin') ));
         }
+        else{
+          $response = $next($request, $response);}
+          return $response;
 
-        $response = $next($request, $response);
-        return $response;
+
     }
 }
