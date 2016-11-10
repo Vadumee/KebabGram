@@ -22,9 +22,6 @@ class KebabController extends Controller {
 
 
   public function getAddKebab($request, $response) {
-    /*if(!(isset($_SESSION["user_email"])) {
-      return $this->view->render($response, 'home.twig');
-    }*/
   	return $this->view->render($response, 'kebab/index.twig');
   }
 
@@ -63,8 +60,7 @@ class KebabController extends Controller {
   	$kebab->kebab_description=$request->getParam('kebab_description');
     $kebab->kebab_tasty_points=0;
     //pour l'instant on fait un utilisateur fictif
-    //$kebab->user_id=$_SESSION["user_email"];
-    $kebab->user_id="Jean-Test";
+    $kebab->user_id=$this->auth->user()->user_id;
     //
     $tmp_name = $_FILES["kebab_pic_link"]["tmp_name"];
     // basename() may prevent filesystem traversal attacks;
