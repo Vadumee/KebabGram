@@ -7,7 +7,7 @@ use App\Middleware\AuthMiddleware;
 use App\Middleware\GuestMiddleware;
 use App\Middleware\AdminMiddleware;
 use App\Middleware\SubscriberMiddleware;
-use App\Controllers\Kebab\KebabController;
+use App\Controllers\Kebab;
 
 
 // // Render a view immediately from routes.php with and arguments
@@ -24,6 +24,9 @@ $app->get('/json', function ($request, $response){
 
 $app->get('/', 'HomeController:index')->setName('home');
 
+
+    $app->get('/kebab/search', 'SearchController:getSearchKebab')->setName('kebab.search');
+    $app->post('/kebab/search', 'SearchController:postSearchKebab');
 $app->get('/@{user_name}', 'ProfileController:getIndex'); //alpha & numeric
 
 $app->group('', function () {
@@ -49,8 +52,8 @@ $app->group('', function () {
 
     $this->get('/kebab/add', 'KebabController:getAddKebab')->setName('kebab.add');
     $this->post('/kebab/add', 'KebabController:postAddKebab');
-})->add(new AuthMiddleware($container));
 
+})->add(new AuthMiddleware($container));
 $app->group('', function () {
     $this->get('/admin', 'AdminController:getIndex')->setName('admin.index');
     $this->post('/admin', 'AdminController:postIndex')->setName('admin.post');
