@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model {
     protected $table = 'tags';
     protected $primaryKey = 'kebab_id';
-    public $incrementing = false;
 
       public $incrementing=false; 
     protected $fillable = [
