@@ -7,6 +7,9 @@ img {
 	height: auto;
 	display: inline-block;
 }
+#searchbar {
+    display: inline-block;
+}
 #kebab_tasty_points{
 	text-align: center;
 	font-size: 2em;

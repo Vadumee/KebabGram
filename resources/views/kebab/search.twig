@@ -1,0 +1,41 @@
+{% extends 'templates/app.twig' %}
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+	 <h2>Recherche de Kebabs</h2>
+	 <div>
+    	<span class="text">Entrez un mot à rechercher, si le mot commence par un '#', tous les kebabs ayant ce tag seront recherchés, sinon, le mot recherché sera
+	 		le nom d'utilisateur et affichera donc les kebabs de ce dernier.</span>
+    	<form action="{{ path_for('kebab.search') }}" method="post">
+    		<input type="hidden" name="op" id="op" value="reg">
+            <div>
+                <input name="word_search" id="word_search" placeholder="Exemple : #kebab" class="form-control">
+                {% if errors.word_search %}
+                    <span class="help-block">{{ errors.word_search | first }}</span>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+            {{ csrf.field | raw }}
+     	</form>
+	 </div>
+	 <div>
+	 {% if word is defined %}
+       <span>{{ word }}</span>
+     {% endif %}
+     <br>
+     {% if kebabs is defined %}
+     	{% if kebabs|length != 0 %}
+     		{% for kebab in kebabs %}
+     			{% for item in kebab %}
+    				<img src="../images/kebabs/{{ item.kebab_image_path }}.{{ item.kebab_image_extension }}">
+				{% endfor %}
+			{% endfor %}
+	 	{% else %}
+	 		<span>Il semblerait que votre recherche n'ait rien donnée, vérifiez que vous n'avez pas fait d'erreur de frappe ou essayez avec un autre tag/nom d'utiliateur</span>
+    	{% endif %}
+     {% endif %}
+	 </div>
+  </div>
+
+{% endblock %}

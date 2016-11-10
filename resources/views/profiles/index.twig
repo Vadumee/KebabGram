@@ -1,10 +1,13 @@
 {% extends 'templates/app.twig' %}
 {% block title %}{{ user.user_name }}{% endblock %}
 {% block content %}
-    <div class="row">
+    <div class="jumbotron">
         <div>
-			<p>Bonjour, ami {{ user_name }} !</p>
+			<p>Bienvenue, {{ user_name }} !</p>
         </div>
+        <hr>
+        <h2>Vos kebabs :</h2>
+        <hr>
         <div>
         {% for kebab in kebabs %}
     		<img src="images/kebabs/{{ kebab.kebab_image_path }}.{{ kebab.kebab_image_extension }}">
