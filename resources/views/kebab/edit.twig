@@ -1,0 +1,25 @@
+{% extends 'templates/app.twig' %}
+{% block title %}{{ kebab['kebab_id']}}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+            	<div id="kebab_image" class="col-md-4"><img src="/images/kebabs/{{ kebab['kebab_image_path'] }}.{{kebab['kebab_image_extension']}}"></div>
+                <div class="container col-md-7">
+                    <div id="kebab_description">Description: {{kebab['kebab_description']}}</div>
+                    <div id="kebab_seller">{{seller["shop_name"]}}</div>
+                    <div id="kebab_adress">{{seller["city"]}} {{ seller["street_number"] }} {{seller["street"]}}</div>
+                    <div id="created_at">{{kebab['created_at']}}</div>
+                </div>
+                <div class="container col-md-1">
+                    {% include 'templates/partials/vote.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

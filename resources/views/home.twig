@@ -2,20 +2,31 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-  <div class="jumbotron">
 	 <h2>Les derniers kebabs :</h2>
 	 <div class="last_kebabs">
-	 	{% for image in images %}
-    		<img src="images/kebabs/{{ image }}">
-		{% endfor %}
+	 		<div class="container">
+			 	{% for kebab_most_recent in kebabs_most_recent %}
+						<div class="kebab_item col-md-4">
+				    	<a href="{{ path_for( "view.kebab",{kebab_id:kebab_most_recent['kebab_id']} )}}">
+				    			<img src="images/kebabs/{{ kebab_most_recent['kebab_image_path'] }}.{{kebab_most_recent['kebab_image_extension']}}">
+							</a>
+						</div>
+				{% endfor %}
+			</div>
 	 </div>
 	 <br>
 	 <h2>Les meilleurs kebabs</h2>
 	 <div class="best_kebabs">
-	 	{% for image_p in images_points %}
-    		<img src="images/kebabs/{{ image_p }}">
-		{% endfor %}
+	 		<div class="container">
+			 	{% for kebab_best in kebabs_best %}
+						<div class="kebab_item col-md-4">
+							<a href="/kebab/{{kebab_best['kebab_id']}}">
+								<img src="images/kebabs/{{ kebab_best['kebab_image_path'] }}.{{kebab_best['kebab_image_extension']}}">
+							</a>
+						</div>
+				{% endfor %}
+			</div>
 	 </div>
-  </div>
+	 
 
 {% endblock %}
