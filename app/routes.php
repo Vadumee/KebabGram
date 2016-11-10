@@ -45,10 +45,11 @@ $app->group('', function () {
 
     $this->get('/notes', 'NoteController:index')->setName('notes');
     $this->post('/notes', 'NoteController:newNote')->setName('new.note');
-    
-    $this->get('/notes/{note_id:[0-9]+}', 'NoteController:getEditNote');
-    $this->put('/notes/{note_id:[0-9]+}', 'NoteController:postEditNote')->setName('edit.note');
     $this->get('/notes/deleteNote/{note_id:[0-9]+}', 'NoteController:deleteNote')->setName('delete.note');
+
+
+    $this->get('/kebab/view/{kebab_id}', 'KebabController:getEditKebab')->setName('view.kebab');
+    $this->put('/kebab/edit/{kebab_id}', 'KebabController:postEditKebab')->setName('edit.kebab');
 
     $this->get('/kebab/add', 'KebabController:getAddKebab')->setName('kebab.add');
     $this->post('/kebab/add', 'KebabController:postAddKebab');

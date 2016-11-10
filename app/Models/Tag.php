@@ -9,6 +9,7 @@ class Tag extends Model {
     protected $primaryKey = 'kebab_id';
     public $incrementing = false;
 
+      public $incrementing=false; 
     protected $fillable = [
         'tag_text',
     ];

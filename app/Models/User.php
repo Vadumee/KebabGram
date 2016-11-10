@@ -11,6 +11,7 @@ class User extends Model
     protected $primaryKey = 'user_id';
     public $incrementing = false;
 
+      public $incrementing=false; 
     protected $fillable = [
         'user_email',
         'user_name',

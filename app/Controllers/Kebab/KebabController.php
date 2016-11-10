@@ -9,6 +9,18 @@ use Respect\Validation\Validator as v;
 
 class KebabController extends Controller {
 
+
+
+  public function getEditKebab($request, $response,$args) {
+    /*if(!(isset($_SESSION["user_email"])) {
+      return $this->view->render($response, 'home.twig');
+    }*/
+    $kebab = Kebab::find($args['kebab_id'])->toArray();
+    $seller= Adress::where('kebab_id', $args['kebab_id'])->first()->toArray();
+  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller'));
+  }
+
+
   public function getAddKebab($request, $response) {
   	return $this->view->render($response, 'kebab/index.twig');
   }
