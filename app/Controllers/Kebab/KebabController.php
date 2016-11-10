@@ -12,7 +12,7 @@ class KebabController extends Controller {
 
 
 
-  public function getEditKebab($request, $response,$args) {
+  public function getViewKebab($request, $response,$args) {
     /*if(!(isset($_SESSION["user_email"])) {
       return $this->view->render($response, 'home.twig');
     }*/
