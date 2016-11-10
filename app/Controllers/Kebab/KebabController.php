@@ -18,8 +18,9 @@ class KebabController extends Controller {
     }*/
     $kebab = Kebab::find($args['kebab_id'])->toArray();
     $seller= Adress::where('kebab_id', $args['kebab_id'])->first()->toArray();
+    $tags= Tag::where('kebab_id', $args['kebab_id'])->get()->toArray();
     $user  = User::find($kebab['user_id']);
-  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller','user'));
+  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller','user', 'tags'));
   }
 
 

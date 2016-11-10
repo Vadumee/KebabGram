@@ -12,6 +12,9 @@
 
                     <h1 id="kebab_user">{{user["user_name"]}}</h1>
                     <blockquote id="kebab_description">{{kebab['kebab_description']}}</blockquote>
+                    {% for tag in tags %}
+                        #{{ tag['tag_text'] }}
+                    {% endfor %}
                     <div class="kebab_location">
                         <div id="kebab_seller">{{seller["shop_name"]}}</div>
                         <div id="kebab_adress">{{seller["city"]}} {{ seller["street_number"] }} {{seller["street"]}}</div>
