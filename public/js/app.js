@@ -6,6 +6,20 @@ $( document ).ready(function() {
     host = pathArray[2];
     url = protocol + '//' + host;
 
+    console.log()
+    $(".kebab_item img").each(function (index,val) {
+        height = $(val).height()
+        width = $(val).width()
+        if (width>height) {
+            $(val).css({"width":"auto", "height":width, "margin-left":-width/4});
+
+        }
+        else {
+            $(val).css({"width":height, "height":'auto'});
+        }
+    })
+
+
     let tasty_point;
     let request;
     $('.up').click(function (request) {
