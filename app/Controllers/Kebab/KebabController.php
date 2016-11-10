@@ -15,7 +15,9 @@ class KebabController extends Controller {
     /*if(!(isset($_SESSION["user_email"])) {
       return $this->view->render($response, 'home.twig');
     }*/
-  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab'));
+    $kebab = Kebab::find($args['kebab_id'])->toArray();
+    $seller= Adress::where('kebab_id', $args['kebab_id'])->first()->toArray();
+  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller'));
   }
 
 
