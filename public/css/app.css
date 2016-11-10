@@ -11,6 +11,10 @@ img {
 	text-align: center;
 	font-size: 2em;
 }
+.kebab_location{
+  margin-top: 10px;
+  margin-right: 10px;
+}
 .vote{
   border-radius: 10px;
   border: solid 1px #DDD;

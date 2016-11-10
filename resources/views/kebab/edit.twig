@@ -9,9 +9,13 @@
             <div class="panel-body">
             	<div id="kebab_image" class="col-md-4"><img src="/images/kebabs/{{ kebab['kebab_image_path'] }}.{{kebab['kebab_image_extension']}}"></div>
                 <div class="container col-md-7">
-                    <div id="kebab_description">Description: {{kebab['kebab_description']}}</div>
-                    <div id="kebab_seller">{{seller["shop_name"]}}</div>
-                    <div id="kebab_adress">{{seller["city"]}} {{ seller["street_number"] }} {{seller["street"]}}</div>
+
+                    <h1 id="kebab_user">{{user["user_name"]}}</h1>
+                    <blockquote id="kebab_description">{{kebab['kebab_description']}}</blockquote>
+                    <div class="kebab_location">
+                        <div id="kebab_seller">{{seller["shop_name"]}}</div>
+                        <div id="kebab_adress">{{seller["city"]}} {{ seller["street_number"] }} {{seller["street"]}}</div>
+                    </div>
                     <div id="created_at">{{kebab['created_at']}}</div>
                 </div>
                 <div class="container col-md-1">

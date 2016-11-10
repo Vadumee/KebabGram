@@ -4,6 +4,7 @@ namespace App\Controllers\Kebab;
 use App\Models\Kebab as Kebab;
 use App\Models\Adress as Adress;
 use App\Models\Tag as Tag;
+use App\Models\User as User;
 use App\Controllers\Controller;
 use Respect\Validation\Validator as v;
 
@@ -17,7 +18,8 @@ class KebabController extends Controller {
     }*/
     $kebab = Kebab::find($args['kebab_id'])->toArray();
     $seller= Adress::where('kebab_id', $args['kebab_id'])->first()->toArray();
-  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller'));
+    $user  = User::find($kebab['user_id']);
+  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller','user'));
   }
 
 
