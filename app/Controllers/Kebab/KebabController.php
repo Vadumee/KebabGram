@@ -25,14 +25,14 @@ class KebabController extends Controller {
       $comments = Comment::where('kebab_id',$args['kebab_id'])->orderBy('created_at', 'desc')->get()->toArray();
 
       //on récupère les noms d'utilisateurs de chaque commentaire
-      $comment_username = array();
+      $comment_content = array();
       if(sizeof($comments) > 0 ) {
         foreach ($comments as $comment) {
           $comment_id = User::select('user_name')
             ->where('user_id','like',$comment['user_id'])
             ->get();
 
-          array_push($comment_username,$comment_id[0]);
+          array_push($comment_content,['comment_user' => $comment_id[0], 'comment_text' => $comment['texte'], 'comment_creation' => $comment['created_at']]);
         }
       }
 
@@ -45,7 +45,7 @@ class KebabController extends Controller {
         $has_voted=false;
       }
 
-  	return $this->view->render($response, 'kebab/display.twig',compact('kebab','seller','user', 'tags', "has_voted", "comments", "comment_username"));
+  	return $this->view->render($response, 'kebab/display.twig',compact('kebab','seller','user', 'tags', "has_voted", "comments", "comment_content"));
   }
 
 

@@ -27,11 +27,13 @@
             </div>
             <div class="panel-body">
                 <h2>Les commentaires :</h2>
-                {% if comments|length != 0 %}
+                {% if comments|length == 0 %}
                     <span>Il semblerait que personne n'ait encore commenté cet humble kebab, et si vous étiez le premier à le faire ?</span>
                 {% else %}
-                    {% for comment in comments %}
-                        
+                    {% for comment in comment_content %}
+                        <div>
+                            <blockquote><p>{{ comment.comment_text }}<p><footer> {{ comment.comment_user.user_name}}, le {{ comment.comment_creation }}</footer></blockquote>
+                        </div>
                     {% endfor %}
                 {% endif %}
                 <form action="{{ path_for( "comment.kebab",{kebab_id:kebab['kebab_id']}) }}" method="post">

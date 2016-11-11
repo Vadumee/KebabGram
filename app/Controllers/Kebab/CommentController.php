@@ -28,7 +28,7 @@ class CommentController extends Controller {
   	]);
 
   	if ($validation->failed()) {
-  		return $response->withRedirect($this->router->pathFor('view.kebab'),['kebab_id' => $args['kebab_id']]);
+  		return $response->withRedirect($this->router->pathFor('view.kebab',['kebab_id' => $args['kebab_id']]));
   	}
 
     //on ajoute le commentaire s'il est valide
@@ -41,7 +41,8 @@ class CommentController extends Controller {
     $comment->texte=$request->getParam('comment');
     $comment->save();
 
-  	return $response->withRedirect($this->router->pathFor('view.kebab'),['kebab_id' => $args['kebab_id']]);
+  	return $response->withRedirect($this->router->pathFor('view.kebab',['kebab_id' => $args['kebab_id']]));
+    
     
   }
 
