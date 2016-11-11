@@ -31,7 +31,7 @@
      			{% for item in kebab %}
                     <div class="kebab_item col-md-4">
                         <a href="{{ path_for( "view.kebab",{kebab_id:item.kebab_id} )}}">
-                            <img src="images/kebabs/{{ item.kebab_image_path }}.{{ item.kebab_image_extension }}">
+                            <img src="/images/kebabs/{{ item.kebab_image_path }}.{{ item.kebab_image_extension }}">
                         </a>
                     </div>
 				{% endfor %}
