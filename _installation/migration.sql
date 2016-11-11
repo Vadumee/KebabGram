@@ -1,7 +1,7 @@
 SET FOREIGN_KEY_CHECKS = 0;
 SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
   FROM information_schema.tables
-  WHERE table_schema = 'database'; -- specify DB name here.
+  WHERE table_schema = 'kebabstagram'; -- specify DB name here.
 
 SET @tables = CONCAT('DROP TABLE ', @tables);
 PREPARE stmt FROM @tables;
@@ -22,7 +22,7 @@ CREATE TABLE `adresses` (
   `kebab_id` varchar(13) NOT NULL,
   `street` varchar(50) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `comments` (
@@ -30,7 +30,7 @@ CREATE TABLE `comments` (
   `kebab_id` varchar(13) NOT NULL,
   `texte` varchar(1420) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `kebabs` (
@@ -41,7 +41,7 @@ CREATE TABLE `kebabs` (
   `kebab_image_path` varchar(13) NOT NULL,
   `kebab_image_extension` varchar(4) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `tags` (
@@ -49,7 +49,7 @@ CREATE TABLE `tags` (
   `kebab_id` varchar(13) NOT NULL,
   `tag_text` varchar(30) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `users` (
@@ -75,14 +75,15 @@ CREATE TABLE `users` (
   `user_password_reset_hash` char(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'user''s password reset code',
   `user_password_reset_timestamp` bigint(20) DEFAULT NULL COMMENT 'timestamp of the password reset request',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='user data';
 
 CREATE TABLE `vote` (
+  `id` varchar(13) NOT NULL,
   `kebab_id` varchar(13) NOT NULL,
   `user_id` varchar(13) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -116,7 +117,8 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `user_email` (`user_email`);
 
 ALTER TABLE `vote`
-  ADD PRIMARY KEY (`kebab_id`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY (`kebab_id`),
   ADD KEY `user_id` (`user_id`);
 
 
@@ -129,7 +131,8 @@ INSERT INTO `users` (`user_id`, `session_id`, `user_name`, `user_age`, `user_gen
 ('58208e831f706', NULL, 'JeanTourloupe', 0, 'Non Specified', NULL, '$2y$10$0Fv05VqaVt4wBQsHPwsJauNZvF0kqu1HRkf.ypUc.b8hTlZVe/8aO', 'bernard@ladrigotte.onche', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, '2016-11-07 13:24:25', '2016-11-07 14:24:25'),
 ('58208ef3b223c', NULL, 'a', 0, 'Non Specified', NULL, '$2y$10$P2/qBNfKdVDHIih8vh77H.P0KBK9I3iOd7HhWASD/22uSYrlpvEAS', 'a@a.a', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, '2016-11-07 13:48:38', '2016-11-07 14:48:38'),
 ('58209d4064b77', NULL, 'Bernard', 30, 'Male', NULL, '$2y$10$Rg/uJqJygI96fnxxSo0eeeT4tAOOZlKS9lbzu96fftDccEn4Jlr6q', 'bernard@ladrigotte.ponche', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, '2016-11-10 12:39:09', '2016-11-10 13:39:09'),
-('58220576c9787', NULL, 'JeanFlibuste', 31, 'Non Specified', NULL, '$2y$10$cuylZQ7ElcdK1FNnmVThHuGg2H4zz/sOddU/AlOS8RmC5ZaOtFfBm', 'ilapas@ditbonjour.vald', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, '2016-11-09 16:46:55', '2016-11-09 17:46:55');
+('58220576c9787', NULL, 'JeanFlibuste', 31, 'Non Specified', NULL, '$2y$10$cuylZQ7ElcdK1FNnmVThHuGg2H4zz/sOddU/AlOS8RmC5ZaOtFfBm', 'ilapas@ditbonjour.vald', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, '2016-11-09 16:46:55', '2016-11-09 17:46:55'),
+('5824e7f5e92ff', NULL, 'essai2', 14, 'Male', '', '$2y$10$YmguK8pGEPdnoPN9eWwFyOLrEK1kHgajuPgWsH.48BdMirvA3ORrO', 'essai2@u.a', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, '2016-11-10 21:49:34', '2016-11-10 21:49:34');;
 
 
 INSERT INTO `kebabs` (`kebab_id`, `user_id`, `kebab_description`, `kebab_tasty_points`, `kebab_image_path`, `kebab_image_extension`, `updated_at`, `created_at`) VALUES
@@ -166,3 +169,12 @@ INSERT INTO `tags` (`tag_id`, `kebab_id`, `tag_text`, `updated_at`, `created_at`
 ('582206f9ee4ba', '582206f9be983', 'TTGL', '2016-11-08 16:10:17', '2016-11-08 16:10:17'),
 ('582206fa25c7b', '582206f9be983', 'drill', '2016-11-08 16:10:18', '2016-11-08 16:10:18'),
 ('582206fa2d110', '582206f9be983', 'GigaDrillBreaker', '2016-11-08 16:10:18', '2016-11-08 16:10:18');
+
+INSERT INTO `vote` (`id`, `kebab_id`, `user_id`, `updated_at`, `created_at`) VALUES
+('5824eb145236c', '58246ff2995ea', '582082313cabe', '2016-11-10 21:48:04', '2016-11-10 21:48:04'),
+('5824eb2eb84b8', '581f61f03b542', '582082313cabe', '2016-11-10 21:48:30', '2016-11-10 21:48:30'),
+('5824eb5faab07', '581f61f03b542', '5824e7f5e92ff', '2016-11-10 21:49:19', '2016-11-10 21:49:19'),
+('5824eb6707ce8', '58246ff2995ea', '5824e7f5e92ff', '2016-11-10 21:49:27', '2016-11-10 21:49:27'),
+('5824eb6b03fb5', '581cf0ccec0aa', '5824e7f5e92ff', '2016-11-10 21:49:31', '2016-11-10 21:49:31'),
+('5824eb7cf39a6', '581cf0ccec0aa', '582082313cabe', '2016-11-10 21:49:48', '2016-11-10 21:49:48'),
+('5824eb817ab39', '581d05e46f9c5', '582082313cabe', '2016-11-10 21:49:53', '2016-11-10 21:49:53');

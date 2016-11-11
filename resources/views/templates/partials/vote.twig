@@ -1,5 +1,10 @@
 <div class="vote">
+    {% if not has_voted %}
     <div class = "up">&#9650;</div>
-    <div id="kebab_tasty_points">{{kebab['kebab_tasty_points']}}</div>
+    {% endif%}
+    <div class="kebab_tasty_points">{{kebab['kebab_tasty_points']}}</div>
+
+        {% if not has_voted %}
     <div class = "down">&#9660;</div>
+    {% endif%}
 </div>
