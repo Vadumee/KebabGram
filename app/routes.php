@@ -57,6 +57,8 @@ $app->group('', function () {
     $this->get('/kebab/add', 'KebabController:getAddKebab')->setName('kebab.add');
     $this->post('/kebab/add', 'KebabController:postAddKebab');
 
+    $this->post('/kebab/view/{kebab_id}', 'CommentController:postCommentKebab')->setName('comment.kebab');
+
 })->add(new AuthMiddleware($container));
 $app->group('', function () {
     $this->get('/admin', 'AdminController:getIndex')->setName('admin.index');

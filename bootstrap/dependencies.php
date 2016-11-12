@@ -86,9 +86,15 @@ $container['HomeController'] = function ($container) {
 $container['AuthController'] = function ($container) {
     return new \App\Controllers\Auth\AuthController($container);
 };
+
 $container['SearchController'] = function ($container) {
     return new \App\Controllers\Kebab\SearchController($container);
 };
+
+$container['CommentController'] = function ($container) {
+    return new \App\Controllers\Kebab\CommentController($container);
+};
+
 $container['KebabController'] = function ($container) {
 	return new \App\Controllers\Kebab\KebabController($container);
 };

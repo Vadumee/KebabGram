@@ -2,6 +2,7 @@
 namespace App\Controllers\Kebab;
 
 use App\Models\Kebab as Kebab;
+use App\Models\Comment as Comment;
 use App\Models\Adress as Adress;
 use App\Models\Vote as Vote;
 use App\Models\Tag as Tag;
@@ -21,6 +22,19 @@ class KebabController extends Controller {
       $seller= Adress::where('kebab_id', $args['kebab_id'])->first()->toArray();
       $tags= Tag::where('kebab_id', $args['kebab_id'])->get()->toArray();
       $user  = User::find($kebab['user_id']);
+      $comments = Comment::where('kebab_id',$args['kebab_id'])->orderBy('created_at', 'desc')->get()->toArray();
+
+      //on récupère les noms d'utilisateurs de chaque commentaire
+      $comment_content = array();
+      if(sizeof($comments) > 0 ) {
+        foreach ($comments as $comment) {
+          $comment_id = User::select('user_name')
+            ->where('user_id','like',$comment['user_id'])
+            ->get();
+
+          array_push($comment_content,['comment_user' => $comment_id[0], 'comment_text' => $comment['texte'], 'comment_creation' => $comment['created_at']]);
+        }
+      }
 
       $has_voted=true;
       if($this->auth->check()){
@@ -31,7 +45,7 @@ class KebabController extends Controller {
         $has_voted=false;
       }
 
-  	return $this->view->render($response, 'kebab/edit.twig',compact('kebab','seller','user', 'tags', "has_voted"));
+  	return $this->view->render($response, 'kebab/display.twig',compact('kebab','seller','user', 'tags', "has_voted", "comments", "comment_content"));
   }
 
 
