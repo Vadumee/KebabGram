@@ -10,8 +10,13 @@
 
 ### Run it:
 
-1. Open terminal, `$ cd kebabstagram` (the root of the git clone)
-2. Create the database in _installation directory
+1. Open terminal, `$ cd kebabstagram` (the root of the git clone) and type:
+  $ chmod -R 777 bootstrap/cache
+  and
+  $ chmod -R 777 public/images
+2. Insert into bootstrap/settings.php your database configuration
+3. Import the install.sql in _installation directory to your database
+4. If you want to have some data in your database, import the data.sql in _installation directory
 
 ## Key directories
 
